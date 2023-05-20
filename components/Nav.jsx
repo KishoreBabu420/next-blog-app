@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
-const Navbar = () => {
+const Nav = () => {
   const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
@@ -19,11 +19,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className='w-full pt-3 mb-16 flex-between'>
-      <Link
-        href='/'
-        className='flex gap-2 flex-center'
-      >
+    <nav className='flex-between w-full mb-16 pt-3'>
+      <Link href='/' className='flex gap-2 flex-center'>
         <Image
           src='/assets/images/logo.svg'
           alt='logo'
@@ -35,21 +32,14 @@ const Navbar = () => {
       </Link>
 
       {/* Desktop Navigation */}
-      <div className='hidden sm:flex'>
+      <div className='sm:flex hidden'>
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
-            <Link
-              href='/create-prompt'
-              className='black_btn'
-            >
+            <Link href='/create-prompt' className='black_btn'>
               Create Post
             </Link>
 
-            <button
-              type='button'
-              onClick={signOut}
-              className='outline_btn'
-            >
+            <button type='button' onClick={signOut} className='outline_btn'>
               Sign Out
             </button>
 
@@ -83,7 +73,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className='relative flex sm:hidden'>
+      <div className='sm:hidden flex relative'>
         {session?.user ? (
           <div className='flex'>
             <Image
@@ -117,7 +107,7 @@ const Navbar = () => {
                     setToggleDropdown(false);
                     signOut();
                   }}
-                  className='w-full mt-5 black_btn'
+                  className='mt-5 w-full black_btn'
                 >
                   Sign Out
                 </button>
@@ -146,4 +136,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Nav;
